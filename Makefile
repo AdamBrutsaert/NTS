@@ -117,12 +117,11 @@ tests: $(TESTS_NAME)
 $(RELEASE_NAME): $(RELEASE_OBJ)
 	@g++ -o $@ $^ $(RELEASE_LDFLAGS) $(RELEASE_LDLIBS)
 
-$(RELEASE_OBJ_DIR)/%.o: $(RELEASE_SRC_DIR)/%.cpp $(RELEASE_DEP_DIR)/%.d | $(RELEASE_OBJ_DIR) $(RELEASE_DEP_DIR)
+$(RELEASE_OBJ_DIR)/%.o: $(RELEASE_SRC_DIR)/%.cpp $(RELEASE_DEP_DIR)/%.d
+	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $(RELEASE_DEP_DIR)/$*.d)
 	@g++ -c -o $@ $< $(RELEASE_CPPFLAGS) $(RELEASE_CXXFLAGS) \
 		-MT $@ -MMD -MP -MF $(RELEASE_DEP_DIR)/$*.d
-
-$(RELEASE_OBJ_DIR) $(RELEASE_DEP_DIR):
-	@mkdir -p $@
 
 $(RELEASE_DEP):
 
@@ -135,7 +134,9 @@ include $(RELEASE_DEP)
 $(DEBUG_NAME): $(DEBUG_OBJ)
 	@g++ -o $@ $^ $(DEBUG_LDFLAGS) $(DEBUG_LDLIBS)
 
-$(DEBUG_OBJ_DIR)/%.o: $(DEBUG_SRC_DIR)/%.cpp $(DEBUG_DEP_DIR)/%.d | $(DEBUG_OBJ_DIR) $(DEBUG_DEP_DIR)
+$(DEBUG_OBJ_DIR)/%.o: $(DEBUG_SRC_DIR)/%.cpp $(DEBUG_DEP_DIR)/%.d
+	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $(DEBUG_DEP_DIR)/$*.d)
 	@g++ -c -o $@ $< $(DEBUG_CPPFLAGS) $(DEBUG_CXXFLAGS) \
 		-MT $@ -MMD -MP -MF $(DEBUG_DEP_DIR)/$*.d
 
@@ -153,7 +154,9 @@ include $(DEBUG_DEP)
 $(TESTS_NAME): $(TESTS_OBJ)
 	@g++ -o $@ $^ $(TESTS_LDFLAGS) $(TESTS_LDLIBS)
 
-$(TESTS_OBJ_DIR)/%.o: $(TESTS_SRC_DIR)/%.cpp $(TESTS_DEP_DIR)/%.d | $(TESTS_OBJ_DIR) $(TESTS_DEP_DIR)
+$(TESTS_OBJ_DIR)/%.o: $(TESTS_SRC_DIR)/%.cpp $(TESTS_DEP_DIR)/%.d
+	@mkdir -p $(dir $@)
+	@mkdir -p $(dir $(TESTS_DEP_DIR)/$*.d)
 	@g++ -c -o $@ $< $(TESTS_CPPFLAGS) $(TESTS_CXXFLAGS) \
 		-MT $@ -MMD -MP -MF $(TESTS_DEP_DIR)/$*.d
 
