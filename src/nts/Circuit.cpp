@@ -6,6 +6,9 @@
 */
 
 #include "nts/Circuit.hpp"
+#include "nts/components/special/InputComponent.hpp"
+#include "nts/components/special/ClockComponent.hpp"
+#include "nts/components/special/OutputComponent.hpp"
 
 namespace nts {
     void Circuit::add(const std::string& name, std::shared_ptr<IComponent> component)
@@ -14,6 +17,17 @@ namespace nts {
             throw ComponentAlreadyExists();
 
         this->_components[name] = component;
+
+        if (std::dynamic_pointer_cast<InputComponent>(component) != nullptr
+            || std::dynamic_pointer_cast<ClockComponent>(component) != nullptr
+        ) {
+            this->_inputs.push_back(name);
+            std::sort(this->_inputs.begin(), this->_inputs.end());
+        }
+        if (std::dynamic_pointer_cast<OutputComponent>(component) != nullptr) {
+            this->_outputs.push_back(name);
+            std::sort(this->_outputs.begin(), this->_outputs.end());
+        }
     }
 
     std::shared_ptr<IComponent> Circuit::get(const std::string& name)
