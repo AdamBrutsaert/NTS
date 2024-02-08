@@ -9,11 +9,15 @@
 
 #include "nts/components/special/OutputComponent.hpp"
 #include "nts/components/special/InputComponent.hpp"
+#include "nts/components/special/TrueComponent.hpp"
+#include "nts/components/special/FalseComponent.hpp"
 
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
         {"output", []() { return std::make_unique<OutputComponent>(); }},
         {"input", []() { return std::make_unique<InputComponent>(); }},
+        {"true", []() { return std::make_unique<TrueComponent>(); }},
+        {"false", []() { return std::make_unique<FalseComponent>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
