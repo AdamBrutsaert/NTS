@@ -7,8 +7,12 @@
 
 #include "nts/components/ComponentFactory.hpp"
 
+#include "nts/components/special/OutputComponent.hpp"
+
 namespace nts {
-    std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{};
+    std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
+        {"output", []() { return std::make_unique<OutputComponent>(); }},
+    };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
     {
