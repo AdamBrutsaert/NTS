@@ -21,6 +21,7 @@
 #include "nts/components/elementary/NorComponent.hpp"
 
 #include "nts/components/gates/C4001Component.hpp"
+#include "nts/components/gates/C4011Component.hpp"
 
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
@@ -38,6 +39,7 @@ namespace nts {
         {"nor", []() { return std::make_unique<NorComponent>(); }},
 
         {"4001", []() { return std::make_unique<C4001Component>(); }},
+        {"4011", []() { return std::make_unique<C4011Component>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
