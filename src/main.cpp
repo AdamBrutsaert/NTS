@@ -5,10 +5,22 @@
 ** main.cpp
 */
 
-#include <iostream>
+#include "nts/State.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-    std::cout << "Hello World" << std::endl;
+    if (argc != 2)
+        return 84;
+
+    try {
+        nts::run(argv[1]);
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+        return 84;
+    } catch (...) {
+        std::cerr << "Unknown error" << std::endl;
+        return 84;
+    }
+
     return 0;
 }
