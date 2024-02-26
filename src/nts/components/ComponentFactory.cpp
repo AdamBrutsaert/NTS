@@ -27,6 +27,8 @@
 #include "nts/components/gates/C4071Component.hpp"
 #include "nts/components/gates/C4081Component.hpp"
 
+#include "nts/components/advanced/FullAdderComponent.hpp"
+
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
         {"output", []() { return std::make_unique<OutputComponent>(); }},
@@ -48,6 +50,8 @@ namespace nts {
         {"4069", []() { return std::make_unique<C4069Component>(); }},
         {"4071", []() { return std::make_unique<C4071Component>(); }},
         {"4081", []() { return std::make_unique<C4081Component>(); }},
+
+        {"full_adder", []() { return std::make_unique<FullAdderComponent>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
