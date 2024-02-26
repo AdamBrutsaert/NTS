@@ -29,6 +29,7 @@
 
 #include "nts/components/advanced/FullAdderComponent.hpp"
 #include "nts/components/advanced/C4008Component.hpp"
+#include "nts/components/advanced/LoggerComponent.hpp"
 
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
@@ -54,6 +55,7 @@ namespace nts {
 
         {"full_adder", []() { return std::make_unique<FullAdderComponent>(); }},
         {"4008", []() { return std::make_unique<C4008Component>(); }},
+        {"logger", []() { return std::make_unique<LoggerComponent>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
