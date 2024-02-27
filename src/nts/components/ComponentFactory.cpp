@@ -32,6 +32,7 @@
 #include "nts/components/advanced/LoggerComponent.hpp"
 #include "nts/components/advanced/SRLatchComponent.hpp"
 #include "nts/components/advanced/FlipFlopComponent.hpp"
+#include "nts/components/advanced/C4013Component.hpp"
 
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
@@ -60,6 +61,7 @@ namespace nts {
         {"logger", []() { return std::make_unique<LoggerComponent>(); }},
         {"sr_latch", []() { return std::make_unique<SRLatchComponent>(); }},
         {"flip_flop", []() { return std::make_unique<FlipFlopComponent>(); }},
+        {"4013", []() { return std::make_unique<C4013Component>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
