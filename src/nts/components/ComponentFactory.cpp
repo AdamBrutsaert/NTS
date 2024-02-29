@@ -35,6 +35,9 @@
 #include "nts/components/advanced/C4013Component.hpp"
 #include "nts/components/advanced/C4017Component.hpp"
 #include "nts/components/advanced/C4040Component.hpp"
+#include "nts/components/advanced/C4094Component.hpp"
+#include "nts/components/advanced/C4512Component.hpp"
+#include "nts/components/advanced/C4514Component.hpp"
 
 namespace nts {
     std::map<std::string, std::function<std::unique_ptr<nts::IComponent>()>> ComponentFactory::_components{
@@ -66,6 +69,9 @@ namespace nts {
         {"4013", []() { return std::make_unique<C4013Component>(); }},
         {"4017", []() { return std::make_unique<C4017Component>(); }},
         {"4040", []() { return std::make_unique<C4040Component>(); }},
+        {"4094", []() { return std::make_unique<C4094Component>(); }},
+        {"4512", []() { return std::make_unique<C4512Component>(); }},
+        {"4514", []() { return std::make_unique<C4514Component>(); }},
     };
 
     std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string& type)
